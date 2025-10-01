@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Class 10's Seat Random Number Program.</title>
+    <title>Class 10's Seat Random Number Program</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -22,11 +22,14 @@
             --light: #f8fafc;
             --dark: #1e293b;
             --gray: #64748b;
+            --bg-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            --hover-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
         }
         
         body {
             font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: var(--bg-gradient);
             color: var(--dark);
             min-height: 100vh;
             display: flex;
@@ -49,6 +52,12 @@
             border: 1px solid rgba(255, 255, 255, 0.2);
             position: relative;
             overflow: hidden;
+            animation: fadeIn 0.8s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
         
         .container::before {
@@ -82,6 +91,12 @@
             align-items: center;
             justify-content: center;
             box-shadow: 0 8px 25px rgba(67, 97, 238, 0.3);
+            animation: floating 3s ease-in-out infinite;
+        }
+        
+        @keyframes floating {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
         }
         
         .logo i {
@@ -125,7 +140,7 @@
             display: flex;
             align-items: center;
             gap: 12px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            box-shadow: var(--card-shadow);
             position: relative;
             overflow: hidden;
         }
@@ -157,7 +172,7 @@
         
         .btn:hover {
             transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+            box-shadow: var(--hover-shadow);
         }
         
         .btn:active {
@@ -173,6 +188,13 @@
                 inset 0 2px 4px rgba(0, 0, 0, 0.05),
                 0 4px 20px rgba(0, 0, 0, 0.08);
             border: 1px solid rgba(255, 255, 255, 0.5);
+            transition: all 0.3s ease;
+        }
+        
+        .output-section:hover {
+            box-shadow: 
+                inset 0 2px 4px rgba(0, 0, 0, 0.05),
+                0 6px 25px rgba(0, 0, 0, 0.12);
         }
         
         .output-header {
@@ -208,6 +230,7 @@
             font-weight: 500;
             min-height: 300px;
             position: relative;
+            transition: all 0.3s ease;
         }
         
         .visualization {
@@ -238,6 +261,12 @@
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
             border: 3px solid #bdc3c7;
             text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .teacher-desk:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
         }
         
         .rows {
@@ -263,9 +292,15 @@
             justify-content: space-between;
             align-items: center;
             padding: 12px;
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+            box-shadow: var(--card-shadow);
             transition: all 0.3s ease;
             position: relative;
+            animation: deskAppear 0.5s ease-out;
+        }
+        
+        @keyframes deskAppear {
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
         }
         
         .desk::after {
@@ -282,7 +317,7 @@
         
         .desk:hover {
             transform: translateY(-5px) scale(1.02);
-            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+            box-shadow: var(--hover-shadow);
             border-color: #667eea;
         }
         
@@ -294,6 +329,12 @@
             padding: 5px;
             border-radius: 6px;
             transition: all 0.3s ease;
+            animation: studentAppear 0.5s ease-out;
+        }
+        
+        @keyframes studentAppear {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
         
         .student.boy {
@@ -324,11 +365,12 @@
             padding: 25px;
             border-radius: 16px;
             text-align: center;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            box-shadow: var(--card-shadow);
             border: 1px solid rgba(255, 255, 255, 0.5);
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
+            animation: fadeIn 0.6s ease-out;
         }
         
         .stat-card::before {
@@ -343,7 +385,7 @@
         
         .stat-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+            box-shadow: var(--hover-shadow);
         }
         
         .stat-icon {
@@ -512,15 +554,6 @@
             }
         }
         
-        .floating {
-            animation: floating 3s ease-in-out infinite;
-        }
-        
-        @keyframes floating {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-        
         .success-message {
             position: fixed;
             top: 20px;
@@ -533,6 +566,9 @@
             transform: translateX(400px);
             transition: transform 0.3s ease;
             z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
         
         .success-message.show {
@@ -569,26 +605,64 @@
         .tab-content.active {
             display: block;
         }
+        
+        /* 添加粒子背景效果 */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+        
+        .particle {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            animation: float 15s infinite linear;
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
     </style>
 </head>
 <body>
+    <!-- 粒子背景 -->
+    <div class="particles" id="particles"></div>
+    
     <div class="container">
         <header>
-            <div class="logo floating">
+            <div class="logo">
                 <i class="fas fa-chalkboard-teacher"></i>
             </div>
-            <h1>Class 10,Grade 2024</h1>
-            <p class="subtitle">Seat Random Number Program.</p>
+            <h1>Class 10, Grade 2024</h1>
+            <p class="subtitle">Seat Random Number Program</p>
         </header>
         
         <div class="control-panel">
             <button class="btn btn-primary" onclick="generateSeats()">
                 <i class="fas fa-random"></i>
-                🎲 Generate Random Seating Chart.
+                🎲 Generate Random Seating Chart
             </button>
             <button class="btn btn-secondary" onclick="resetOutput()">
                 <i class="fas fa-redo"></i>
-                🔄 Reset System.
+                🔄 Reset System
             </button>
         </div>
         
@@ -601,11 +675,11 @@
             <div class="output-header">
                 <div class="output-title">
                     <i class="fas fa-table"></i>
-                    Seat Allocation Result.
+                    Seat Allocation Result
                 </div>
                 <div class="tab-buttons">
-                    <button class="tab-btn active" onclick="switchTab('console')">Console View.</button>
-                    <button class="tab-btn" onclick="switchTab('visual')">Visual View.</button>
+                    <button class="tab-btn active" onclick="switchTab('console')">Console View</button>
+                    <button class="tab-btn" onclick="switchTab('visual')">Visual View</button>
                 </div>
             </div>
             
@@ -636,28 +710,28 @@ This system ensures the randomness and fairness of seat allocation, with a 3.2% 
                 <div class="stat-icon">
                     <i class="fas fa-male"></i>
                 </div>
-                <h3>Boy Count.</h3>
+                <h3>Boy Count</h3>
                 <div class="number">31</div>
             </div>
             <div class="stat-card stat-girl">
                 <div class="stat-icon">
                     <i class="fas fa-female"></i>
                 </div>
-                <h3>Girl Count.</h3>
+                <h3>Girl Count</h3>
                 <div class="number">23</div>
             </div>
             <div class="stat-card stat-total">
                 <div class="stat-icon">
                     <i class="fas fa-users"></i>
                 </div>
-                <h3>All Count.</h3>
+                <h3>All Count</h3>
                 <div class="number">54</div>
             </div>
             <div class="stat-card stat-seat">
                 <div class="stat-icon">
                     <i class="fas fa-chair"></i>
                 </div>
-                <h3>Seat Count.</h3>
+                <h3>Seat Count</h3>
                 <div class="number">27</div>
             </div>
         </div>
@@ -665,7 +739,7 @@ This system ensures the randomness and fairness of seat allocation, with a 3.2% 
         <footer>
             <div class="footer-content">
                 <div>
-                    <p>© 2025 Class 10's Seat Random Number Program. | Author by @wrh316 | Website</p>
+                    <p>© 2025 Class 10's Seat Random Number Program | Author by @wrh316 | Website</p>
                     <p style="margin-top: 5px; font-size: 0.9rem; color: #94a3b8;">
                         <i class="fas fa-code"></i> Website Versions，C++ Versions：https://note.ms/class10seat
                     </p>
@@ -678,7 +752,7 @@ This system ensures the randomness and fairness of seat allocation, with a 3.2% 
     </div>
 
     <div class="success-message" id="successMessage">
-        <i class="fas fa-check-circle"></i> The Code has Completed Successfully.
+        <i class="fas fa-check-circle"></i> The Code has Completed Successfully
     </div>
 
     <script>
@@ -695,6 +769,34 @@ This system ensures the randomness and fairness of seat allocation, with a 3.2% 
             "魏可晗", "陈晓希", "汪嘉彦", "沈傲然", "刘洋东", "余正月", "王泺辰", "杨渃馨",
             "余正秋", "张瀛嘉", "汪悦桐", "陈雨谦", "孙天佑", "黄焱熔", "肖雅祺", "常昕妤"
         ];
+        
+        // 创建粒子背景
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 30;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                
+                // 随机大小
+                const size = Math.random() * 10 + 5;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                
+                // 随机位置
+                particle.style.left = `${Math.random() * 100}%`;
+                
+                // 随机动画延迟
+                particle.style.animationDelay = `${Math.random() * 15}s`;
+                
+                // 随机动画时长
+                const duration = Math.random() * 10 + 10;
+                particle.style.animationDuration = `${duration}s`;
+                
+                particlesContainer.appendChild(particle);
+            }
+        }
         
         // Fisher-Yates 洗牌算法
         function shuffleArray(array) {
@@ -871,6 +973,7 @@ This system ensures the randomness and fairness of seat allocation, with a 3.2% 
         // 页面加载时显示初始信息
         window.addEventListener('DOMContentLoaded', () => {
             console.log('The intelligent seat allocation system has been loaded.');
+            createParticles();
         });
     </script>
 </body>
