@@ -348,8 +348,8 @@
 <body>
     <div class="container">
         <header>
-            <h1>八年级十班座位随机分配系统</h1>
-            <p class="subtitle">基于原C++程序实现的Web版本 - 完全相同的分配逻辑</p>
+            <h1>Class 10's Seat Random Number Program.</h1>
+            <p class="subtitle">Website 版本，C++ 版本：https://note.ms/class10seat</p>
         </header>
         
         <div class="control-panel">
@@ -378,38 +378,38 @@
         
         <div class="info-panel">
             <h3>📊 班级信息统计</h3>
-            <p>本系统完全按照原C++程序的逻辑实现，确保座位分配的随机性和公平性。</p>
+            <p>本系统确保座位分配的随机性和公平性，每个人分配到的概率为 3.2%。</p>
             
             <div class="stats">
                 <div class="stat-card">
-                    <h4>👦 男生人数</h4>
+                    <h4>Boy Count</h4>
                     <p>31</p>
                 </div>
                 <div class="stat-card">
-                    <h4>👧 女生人数</h4>
+                    <h4>Girl Count</h4>
                     <p>23</p>
                 </div>
                 <div class="stat-card">
-                    <h4>👥 总人数</h4>
+                    <h4>All Count</h4>
                     <p>54</p>
                 </div>
                 <div class="stat-card">
-                    <h4>💺 座位数</h4>
+                    <h4>Seat Count</h4>
                     <p>27</p>
                 </div>
             </div>
         </div>
         
         <footer>
-            <p>© 2025 八年级十班座位分配系统 | 原程序作者: wrh316 | Web版本开发</p>
+            <p>© 2025 Class 10's Seat Random Number Program. | Author by @wrh316 | Website</p>
             <p style="margin-top: 10px; font-size: 0.9rem; color: #95a5a6;">
-                版本 1.0 | 最后更新: 2025.9.28
+                Version: 1.0 | Last Update: 2025.10.1
             </p>
         </footer>
     </div>
 
     <script>
-        // 学生名单数据 - 完全按照原C++程序
+        // Student Details
         const boys = [
             "", "张逸轩", "张庐焜", "黄月童", "吴弘宇", "张涵睿", "余浩玮", "许正涛",
             "王若鸿", "张炜承", "郭辰睿", "闻泽", "高竟翔", "吴进宇", "章津跃", "辛伯辰",
