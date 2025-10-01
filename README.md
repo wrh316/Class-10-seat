@@ -552,18 +552,18 @@
         function toggleConsole() {
             if (consoleOutput.style.display === 'none') {
                 consoleOutput.style.display = 'block';
-                consoleBtn.textContent = '📋 隐藏控制台输出';
+                consoleBtn.textContent = '📋 Hide Console Output.';
             } else {
                 consoleOutput.style.display = 'none';
-                consoleBtn.textContent = '📋 显示控制台输出';
+                consoleBtn.textContent = '📋 Display Console Output.';
             }
         }
         
         // 重置系统
         function resetSystem() {
-            seatingPlan.innerHTML = '<div style="text-align: center; padding: 40px; color: #7f8c8d; font-size: 1.2rem;">点击"生成随机座位表"按钮开始分配座位</div>';
+            seatingPlan.innerHTML = '<div style="text-align: center; padding: 40px; color: #7f8c8d; font-size: 1.2rem;">Click the "Generate Random Seating Chart" button to start seat allocation.</div>';
             consoleOutput.style.display = 'none';
-            consoleBtn.textContent = '📋 显示控制台输出';
+            consoleBtn.textContent = '📋 Display Console Output.';
             consoleOutput.textContent = '';
         }
         
@@ -574,8 +574,8 @@
         
         // 页面加载时显示一些信息
         window.addEventListener('DOMContentLoaded', () => {
-            console.log('八年级十班座位分配系统已加载');
-            console.log(`男生人数: ${boys.length - 1}, 女生人数: ${girls.length - 1}`);
+            console.log('The seat allocation system for Class 10, Grade 8 has been loaded.');
+            console.log(`Boy Count: ${boys.length - 1}, Girl Count: ${girls.length - 1}`);
         });
     </script>
 </body>
