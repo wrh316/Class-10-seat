@@ -613,6 +613,7 @@
                 <div class="output-container" id="output">
 Welcome to use the intelligent seat allocation system.
 Click the button above to start generating a random seating chart.
+This system ensures the randomness and fairness of seat allocation, with a 3.2% probability of each person being assigned.
                 </div>
             </div>
             
@@ -670,7 +671,7 @@ Click the button above to start generating a random seating chart.
                     </p>
                 </div>
                 <div class="version">
-                    <i class="fas fa-star"></i> Version 2.0
+                    <i class="fas fa-star"></i> Version 3.16.7 | Last Update: 2025.10.1
                 </div>
             </div>
         </footer>
@@ -863,7 +864,7 @@ Click the button above to start generating a random seating chart.
         
         // 重置输出
         function resetOutput() {
-            document.getElementById('output').textContent = 'Welcome to use the intelligent seat allocation system.\nClick the button above to start generating a random seating chart.';
+            document.getElementById('output').textContent = 'Welcome to use the intelligent seat allocation system.\nClick the button above to start generating a random seating chart.\nThis system ensures the randomness and fairness of seat allocation, with a 3.2% probability of each person being assigned.';
             document.getElementById('seatingPlan').innerHTML = '<div style="text-align: center; padding: 40px; color: #7f8c8d; font-size: 1.2rem;">Click the "Generate Random Seating Chart" button to start seat allocation.</div>';
         }
         
