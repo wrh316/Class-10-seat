@@ -339,6 +339,20 @@
             margin: 0 auto 15px;
         }
         
+        .success-message {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--success);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transform: translateX(400px);
+            transition: transform 0.3s ease;
+            z-index: 1000;
+        }
+        
         @keyframes spin {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
@@ -407,7 +421,9 @@
             </p>
         </footer>
     </div>
-
+    <div class="success-message" id="successMessage">
+        <i class="fas fa-check-circle"></i> The Code has Complete Successfully.
+    </div>
     <script>
         // Student Details
         const boys = [
@@ -439,7 +455,14 @@
             }
             return array;
         }
-        
+        // 显示成功消息
+        function showSuccessMessage() {
+            const message = document.getElementById('successMessage');
+            message.classList.add('show');
+            setTimeout(() => {
+                message.classList.remove('show');
+            }, 3000);
+        }
         // 生成座位表
         function generateSeatingPlan() {
             loading.style.display = 'block';
@@ -520,7 +543,7 @@
                 consoleText += '讲 台\n';
                 consoleOutput.textContent = consoleText;
                 loading.style.display = 'none';
-                
+                showSuccessMessage();
             }, 800); // 800ms延迟模拟加载
         }
         
