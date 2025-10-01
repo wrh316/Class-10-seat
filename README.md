@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>八年级十班座位随机分配系统</title>
+    <title>Class 10's Seat Random Number Program.</title>
     <style>
         * {
             margin: 0;
