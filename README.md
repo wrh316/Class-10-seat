@@ -349,36 +349,36 @@
     <div class="container">
         <header>
             <h1>Class 10's Seat Random Number Program.</h1>
-            <p class="subtitle">Website 版本，C++ 版本：https://note.ms/class10seat</p>
+            <p class="subtitle">Website Versions，C++ Versions：https://note.ms/class10seat</p>
         </header>
         
         <div class="control-panel">
-            <button id="generateBtn">🎲 生成随机座位表</button>
-            <button id="consoleBtn">📋 显示控制台输出</button>
-            <button id="resetBtn">🔄 重置系统</button>
+            <button id="generateBtn">🎲 Generate Random Seating Chart.</button>
+            <button id="consoleBtn">📋 Display Console Output.</button>
+            <button id="resetBtn">🔄 Reset System.</button>
         </div>
         
         <div class="loading" id="loading">
             <div class="spinner"></div>
-            正在随机分配座位中...
+            Seats are being randomly assigned...
         </div>
         
         <div class="classroom">
             <div class="teacher-desk">讲 台</div>
             <div class="rows" id="seatingPlan">
                 <div style="text-align: center; padding: 40px; color: #7f8c8d; font-size: 1.2rem;">
-                    点击"生成随机座位表"按钮开始分配座位
+                    Click the "Generate Random Seating Chart" button to start seat allocation.
                 </div>
             </div>
         </div>
         
         <div class="output-console" id="consoleOutput" style="display: none;">
-            <!-- 控制台输出将在这里显示 -->
+            <!-- The console output will be displayed here. -->
         </div>
         
         <div class="info-panel">
-            <h3>📊 班级信息统计</h3>
-            <p>本系统确保座位分配的随机性和公平性，每个人分配到的概率为 3.2%。</p>
+            <h3>Class Information Statistics.</h3>
+            <p>This system ensures the randomness and fairness of seat allocation, with a 3.2% probability of each person being assigned.</p>
             
             <div class="stats">
                 <div class="stat-card">
