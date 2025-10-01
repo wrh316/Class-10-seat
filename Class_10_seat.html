@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>八年级十班座位随机分配系统</title>
+    <title>Class 10's Seat Random Number Program.</title>
     <style>
         * {
             margin: 0;
@@ -348,68 +348,68 @@
 <body>
     <div class="container">
         <header>
-            <h1>八年级十班座位随机分配系统</h1>
-            <p class="subtitle">基于原C++程序实现的Web版本 - 完全相同的分配逻辑</p>
+            <h1>Class 10's Seat Random Number Program.</h1>
+            <p class="subtitle">Website Versions，C++ Versions：https://note.ms/class10seat</p>
         </header>
         
         <div class="control-panel">
-            <button id="generateBtn">🎲 生成随机座位表</button>
-            <button id="consoleBtn">📋 显示控制台输出</button>
-            <button id="resetBtn">🔄 重置系统</button>
+            <button id="generateBtn">🎲 Generate Random Seating Chart.</button>
+            <button id="consoleBtn">📋 Display Console Output.</button>
+            <button id="resetBtn">🔄 Reset System.</button>
         </div>
         
         <div class="loading" id="loading">
             <div class="spinner"></div>
-            正在随机分配座位中...
+            Seats are being randomly assigned...
         </div>
         
         <div class="classroom">
             <div class="teacher-desk">讲 台</div>
             <div class="rows" id="seatingPlan">
                 <div style="text-align: center; padding: 40px; color: #7f8c8d; font-size: 1.2rem;">
-                    点击"生成随机座位表"按钮开始分配座位
+                    Click the "Generate Random Seating Chart" button to start seat allocation.
                 </div>
             </div>
         </div>
         
         <div class="output-console" id="consoleOutput" style="display: none;">
-            <!-- 控制台输出将在这里显示 -->
+            <!-- The console output will be displayed here. -->
         </div>
         
         <div class="info-panel">
-            <h3>📊 班级信息统计</h3>
-            <p>本系统完全按照原C++程序的逻辑实现，确保座位分配的随机性和公平性。</p>
+            <h3>Class Information Statistics.</h3>
+            <p>This system ensures the randomness and fairness of seat allocation, with a 3.2% probability of each person being assigned.</p>
             
             <div class="stats">
                 <div class="stat-card">
-                    <h4>👦 男生人数</h4>
+                    <h4>Boy Count</h4>
                     <p>31</p>
                 </div>
                 <div class="stat-card">
-                    <h4>👧 女生人数</h4>
+                    <h4>Girl Count</h4>
                     <p>23</p>
                 </div>
                 <div class="stat-card">
-                    <h4>👥 总人数</h4>
+                    <h4>All Count</h4>
                     <p>54</p>
                 </div>
                 <div class="stat-card">
-                    <h4>💺 座位数</h4>
+                    <h4>Seat Count</h4>
                     <p>27</p>
                 </div>
             </div>
         </div>
         
         <footer>
-            <p>© 2025 八年级十班座位分配系统 | 原程序作者: wrh316 | Web版本开发</p>
+            <p>© 2025 Class 10's Seat Random Number Program. | Author by @wrh316 | Website</p>
             <p style="margin-top: 10px; font-size: 0.9rem; color: #95a5a6;">
-                版本 1.0 | 最后更新: 2025.9.28
+                Version: 1.0 | Last Update: 2025.10.1
             </p>
         </footer>
     </div>
 
     <script>
-        // 学生名单数据 - 完全按照原C++程序
+        // Student Details
         const boys = [
             "", "张逸轩", "张庐焜", "黄月童", "吴弘宇", "张涵睿", "余浩玮", "许正涛",
             "王若鸿", "张炜承", "郭辰睿", "闻泽", "高竟翔", "吴进宇", "章津跃", "辛伯辰",
@@ -552,18 +552,18 @@
         function toggleConsole() {
             if (consoleOutput.style.display === 'none') {
                 consoleOutput.style.display = 'block';
-                consoleBtn.textContent = '📋 隐藏控制台输出';
+                consoleBtn.textContent = '📋 Hide Console Output.';
             } else {
                 consoleOutput.style.display = 'none';
-                consoleBtn.textContent = '📋 显示控制台输出';
+                consoleBtn.textContent = '📋 Display Console Output.';
             }
         }
         
         // 重置系统
         function resetSystem() {
-            seatingPlan.innerHTML = '<div style="text-align: center; padding: 40px; color: #7f8c8d; font-size: 1.2rem;">点击"生成随机座位表"按钮开始分配座位</div>';
+            seatingPlan.innerHTML = '<div style="text-align: center; padding: 40px; color: #7f8c8d; font-size: 1.2rem;">Click the "Generate Random Seating Chart" button to start seat allocation.</div>';
             consoleOutput.style.display = 'none';
-            consoleBtn.textContent = '📋 显示控制台输出';
+            consoleBtn.textContent = '📋 Display Console Output.';
             consoleOutput.textContent = '';
         }
         
@@ -574,8 +574,8 @@
         
         // 页面加载时显示一些信息
         window.addEventListener('DOMContentLoaded', () => {
-            console.log('八年级十班座位分配系统已加载');
-            console.log(`男生人数: ${boys.length - 1}, 女生人数: ${girls.length - 1}`);
+            console.log('The seat allocation system for Class 10, Grade 8 has been loaded.');
+            console.log(`Boy Count: ${boys.length - 1}, Girl Count: ${girls.length - 1}`);
         });
     </script>
 </body>
