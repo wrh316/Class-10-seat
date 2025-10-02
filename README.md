@@ -640,19 +640,114 @@
                 opacity: 0;
             }
         }
+        
+        /* 个性化元素：班级徽章 */
+        .class-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #ffd700, #ffa500);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 5px 15px rgba(255, 165, 0, 0.3);
+            animation: rotate 10s linear infinite;
+        }
+        
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .class-badge i {
+            font-size: 1.5rem;
+            color: white;
+        }
+        
+        /* 个性化元素：装饰性边框 */
+        .decorative-border {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            right: 10px;
+            bottom: 10px;
+            border: 2px dashed rgba(67, 97, 238, 0.2);
+            border-radius: 20px;
+            pointer-events: none;
+        }
+        
+        /* 个性化元素：动态背景图案 */
+        .bg-pattern {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(67, 97, 238, 0.05) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(76, 201, 240, 0.05) 0%, transparent 20%),
+                radial-gradient(circle at 50% 50%, rgba(74, 222, 128, 0.05) 0%, transparent 30%);
+            z-index: -1;
+        }
+        
+        /* 个性化元素：标题装饰 */
+        .title-decoration {
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, var(--primary), transparent);
+            border-radius: 2px;
+        }
+        
+        /* 个性化元素：座位编号 */
+        .desk-number {
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--primary);
+            color: white;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: bold;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
     </style>
 </head>
 <body>
     <!-- 粒子背景 -->
     <div class="particles" id="particles"></div>
     
+    <!-- 动态背景图案 -->
+    <div class="bg-pattern"></div>
+    
     <div class="container">
+        <!-- 班级徽章 -->
+        <div class="class-badge">
+            <i class="fas fa-graduation-cap"></i>
+        </div>
+        
+        <!-- 装饰性边框 -->
+        <div class="decorative-border"></div>
+        
         <header>
             <div class="logo">
                 <i class="fas fa-chalkboard-teacher"></i>
             </div>
             <h1>Class 10, Grade 2024</h1>
             <p class="subtitle">Seat Random Number Program</p>
+            <div class="title-decoration"></div>
         </header>
         
         <div class="control-panel">
@@ -846,9 +941,15 @@ This system ensures the randomness and fairness of seat allocation, with a 3.2% 
         }
         
         // 创建单个桌子元素
-        function createDesk(student1, student2) {
+        function createDesk(student1, student2, deskNumber) {
             const desk = document.createElement('div');
             desk.className = 'desk';
+            
+            // 添加座位编号
+            const deskNumberElem = document.createElement('div');
+            deskNumberElem.className = 'desk-number';
+            deskNumberElem.textContent = deskNumber;
+            desk.appendChild(deskNumberElem);
             
             const student1Elem = document.createElement('div');
             student1Elem.className = `student ${isBoy(student1) ? 'boy' : 'girl'}`;
@@ -889,6 +990,7 @@ This system ensures the randomness and fairness of seat allocation, with a 3.2% 
                 seatingPlan.innerHTML = '';
                 
                 // 生成座位表
+                let deskCounter = 1;
                 for (let i = 1; i <= 27; i += 4) {
                     let line = '| ';
                     const row = document.createElement('div');
@@ -902,7 +1004,8 @@ This system ensures the randomness and fairness of seat allocation, with a 3.2% 
                                 
                                 const desk = createDesk(
                                     boys[cardboy[i + j - 1]], 
-                                    girls[cardgirl[i + j - 1]]
+                                    girls[cardgirl[i + j - 1]],
+                                    deskCounter++
                                 );
                                 row.appendChild(desk);
                             }
@@ -913,7 +1016,8 @@ This system ensures the randomness and fairness of seat allocation, with a 3.2% 
                                 
                                 const desk = createDesk(
                                     girls[cardgirl[i + j - 1]], 
-                                    boys[cardboy[i + j - 1]]
+                                    boys[cardboy[i + j - 1]],
+                                    deskCounter++
                                 );
                                 row.appendChild(desk);
                             }
@@ -925,7 +1029,8 @@ This system ensures the randomness and fairness of seat allocation, with a 3.2% 
                             
                             const desk = createDesk(
                                 boys[cardboy[i + j - 1]], 
-                                girls[cardgirl[i + j - 1]]
+                                girls[cardgirl[i + j - 1]],
+                                deskCounter++
                             );
                             row.appendChild(desk);
                         }
@@ -934,7 +1039,8 @@ This system ensures the randomness and fairness of seat allocation, with a 3.2% 
                         
                         const desk = createDesk(
                             boys[cardboy[i + 3 - 1]], 
-                            boys[cardboy[i + 7 - 1]]
+                            boys[cardboy[i + 7 - 1]],
+                            deskCounter++
                         );
                         row.appendChild(desk);
                     } else {
@@ -944,7 +1050,8 @@ This system ensures the randomness and fairness of seat allocation, with a 3.2% 
                             
                             const desk = createDesk(
                                 boys[cardboy[i + j - 1]], 
-                                boys[cardboy[i + j + 4 - 1]]
+                                boys[cardboy[i + j + 4 - 1]],
+                                deskCounter++
                             );
                             row.appendChild(desk);
                         }
