@@ -723,6 +723,139 @@
             font-weight: bold;
             box-shadow: 0 2px 5px rgba(0,0,0,0.2);
         }
+        
+        /* 新增个性化元素：装饰性星星 */
+        .decoration-star {
+            position: absolute;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 1.2rem;
+            animation: twinkle 3s infinite alternate;
+        }
+        
+        @keyframes twinkle {
+            0% { opacity: 0.3; transform: scale(0.8); }
+            100% { opacity: 1; transform: scale(1.2); }
+        }
+        
+        /* 新增个性化元素：时间显示 */
+        .time-display {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            padding: 10px 15px;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            color: var(--dark);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        /* 新增个性化元素：班级标语 */
+        .class-motto {
+            text-align: center;
+            margin-top: 10px;
+            font-style: italic;
+            color: var(--gray);
+            font-size: 1rem;
+            position: relative;
+            padding: 0 20px;
+        }
+        
+        .class-motto::before,
+        .class-motto::after {
+            content: '"';
+            font-size: 1.5rem;
+            color: var(--primary);
+            position: absolute;
+            top: -5px;
+        }
+        
+        .class-motto::before {
+            left: 0;
+        }
+        
+        .class-motto::after {
+            right: 0;
+        }
+        
+        /* 新增个性化元素：进度条 */
+        .progress-bar {
+            height: 6px;
+            background: rgba(67, 97, 238, 0.2);
+            border-radius: 3px;
+            overflow: hidden;
+            margin-top: 15px;
+            display: none;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            width: 0%;
+            transition: width 0.5s ease;
+            border-radius: 3px;
+        }
+        
+        /* 新增个性化元素：学生卡片翻转效果 */
+        .student-card {
+            perspective: 1000px;
+            width: 48%;
+        }
+        
+        .student-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+        
+        .student-card:hover .student-inner {
+            transform: rotateY(180deg);
+        }
+        
+        .student-front, .student-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            padding: 5px;
+        }
+        
+        .student-front {
+            color: white;
+        }
+        
+        .student-back {
+            background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+            color: var(--dark);
+            transform: rotateY(180deg);
+            font-size: 0.8rem;
+        }
+        
+        /* 新增个性化元素：教室背景 */
+        .classroom-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                linear-gradient(90deg, transparent 49%, rgba(0,0,0,0.05) 50%, transparent 51%),
+                linear-gradient(transparent 49%, rgba(0,0,0,0.05) 50%, transparent 51%);
+            background-size: 50px 50px;
+            opacity: 0.1;
+            z-index: -1;
+        }
     </style>
 </head>
 <body>
@@ -732,7 +865,16 @@
     <!-- 动态背景图案 -->
     <div class="bg-pattern"></div>
     
+    <!-- 装饰性星星 -->
+    <div class="decoration-star" style="top: 10%; left: 5%;"><i class="fas fa-star"></i></div>
+    <div class="decoration-star" style="top: 15%; right: 10%;"><i class="fas fa-star"></i></div>
+    <div class="decoration-star" style="bottom: 20%; left: 15%;"><i class="fas fa-star"></i></div>
+    <div class="decoration-star" style="bottom: 10%; right: 5%;"><i class="fas fa-star"></i></div>
+    
     <div class="container">
+        <!-- 时间显示 -->
+        <div class="time-display" id="timeDisplay"></div>
+        
         <!-- 班级徽章 -->
         <div class="class-badge">
             <i class="fas fa-graduation-cap"></i>
@@ -747,6 +889,7 @@
             </div>
             <h1>Class 10, Grade 2024</h1>
             <p class="subtitle">Seat Random Number Program</p>
+            <div class="class-motto">十全十美，十班无畏，十战十胜，勇夺金杯。</div>
             <div class="title-decoration"></div>
         </header>
         
@@ -759,6 +902,11 @@
                 <i class="fas fa-redo"></i>
                 🔄 Reset System
             </button>
+        </div>
+        
+        <!-- 进度条 -->
+        <div class="progress-bar" id="progressBar">
+            <div class="progress-fill" id="progressFill"></div>
         </div>
         
         <div class="loading" id="loading">
@@ -788,6 +936,7 @@ This system ensures the randomness and fairness of seat allocation, with a 3.2% 
             
             <div class="tab-content" id="visual-tab">
                 <div class="classroom">
+                    <div class="classroom-bg"></div>
                     <div class="teacher-desk" id="teacherDesk">
                         <i class="fas fa-chalkboard"></i> 讲台
                     </div>
@@ -940,7 +1089,21 @@ This system ensures the randomness and fairness of seat allocation, with a 3.2% 
             return boys.includes(name);
         }
         
-        // 创建单个桌子元素
+        // 更新时钟显示
+        function updateClock() {
+            const now = new Date();
+            const timeString = now.toLocaleString('zh-CN', {
+                year: 'numeric',
+                month: '2-digit',
+                day: '2-digit',
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit',
+                weekday: 'long'
+            });
+            document.getElementById('timeDisplay').textContent = timeString;
+        }
+        
         function createDesk(student1, student2, deskNumber) {
             const desk = document.createElement('div');
             desk.className = 'desk';
@@ -970,10 +1133,23 @@ This system ensures the randomness and fairness of seat allocation, with a 3.2% 
             const output = document.getElementById('output');
             const seatingPlan = document.getElementById('seatingPlan');
             const loading = document.getElementById('loading');
+            const progressBar = document.getElementById('progressBar');
+            const progressFill = document.getElementById('progressFill');
             
-            // 显示加载动画
+            // 显示加载动画和进度条
             loading.style.display = 'block';
+            progressBar.style.display = 'block';
             output.textContent = 'Seats are being allocated. Please wait a moment...';
+            
+            // 模拟进度条
+            let progress = 0;
+            const progressInterval = setInterval(() => {
+                progress += 5;
+                progressFill.style.width = `${progress}%`;
+                if (progress >= 100) {
+                    clearInterval(progressInterval);
+                }
+            }, 100);
             
             setTimeout(() => {
                 let outputText = '';
@@ -1064,6 +1240,8 @@ This system ensures the randomness and fairness of seat allocation, with a 3.2% 
                 // 设置输出
                 output.textContent = outputText;
                 loading.style.display = 'none';
+                progressBar.style.display = 'none';
+                progressFill.style.width = '0%';
                 
                 // 显示成功消息
                 showSuccessMessage();
@@ -1081,6 +1259,8 @@ This system ensures the randomness and fairness of seat allocation, with a 3.2% 
         window.addEventListener('DOMContentLoaded', () => {
             console.log('The intelligent seat allocation system has been loaded.');
             createParticles();
+            updateClock();
+            setInterval(updateClock, 1000);
         });
     </script>
 </body>
