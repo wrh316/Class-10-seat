@@ -27,6 +27,22 @@
             --hover-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
         }
         
+        /* 深色主题变量 */
+        .dark-theme {
+            --primary: #5b6bf0;
+            --secondary: #4c1d95;
+            --accent: #60d9f0;
+            --success: #5ae68a;
+            --warning: #f7b955;
+            --danger: #f87171;
+            --light: #1e293b;
+            --dark: #f1f5f9;
+            --gray: #94a3b8;
+            --bg-gradient: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+            --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            --hover-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+        }
+        
         body {
             font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
             background: var(--bg-gradient);
@@ -37,6 +53,7 @@
             align-items: center;
             padding: 20px;
             line-height: 1.6;
+            transition: all 0.3s ease;
         }
         
         .container {
@@ -53,6 +70,12 @@
             position: relative;
             overflow: hidden;
             animation: fadeIn 0.8s ease-out;
+            transition: all 0.3s ease;
+        }
+        
+        .dark-theme .container {
+            background: rgba(30, 41, 59, 0.95);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
         
         @keyframes fadeIn {
@@ -191,6 +214,10 @@
             transition: all 0.3s ease;
         }
         
+        .dark-theme .output-section {
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
         .output-section:hover {
             box-shadow: 
                 inset 0 2px 4px rgba(0, 0, 0, 0.05),
@@ -204,6 +231,10 @@
             margin-bottom: 20px;
             padding-bottom: 15px;
             border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+        }
+        
+        .dark-theme .output-header {
+            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
         }
         
         .output-title {
@@ -231,6 +262,11 @@
             min-height: 300px;
             position: relative;
             transition: all 0.3s ease;
+        }
+        
+        .dark-theme .output-container {
+            background: #0f172a;
+            border: 2px solid #475569;
         }
         
         .visualization {
@@ -373,6 +409,11 @@
             animation: fadeIn 0.6s ease-out;
         }
         
+        .dark-theme .stat-card {
+            background: linear-gradient(135deg, #1e293b, #334155);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
         .stat-card::before {
             content: '';
             position: absolute;
@@ -456,6 +497,10 @@
             border-top: 1px solid rgba(0, 0, 0, 0.1);
         }
         
+        .dark-theme footer {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
         .footer-content {
             display: flex;
             justify-content: space-between;
@@ -470,6 +515,10 @@
             border-radius: 20px;
             font-size: 0.9rem;
             font-weight: 500;
+        }
+        
+        .dark-theme .version {
+            background: #334155;
         }
         
         @media (max-width: 768px) {
@@ -593,6 +642,10 @@
             color: var(--gray);
         }
         
+        .dark-theme .tab-btn {
+            background: #334155;
+        }
+        
         .tab-btn.active {
             background: var(--primary);
             color: white;
@@ -606,7 +659,7 @@
             display: block;
         }
         
-        /* 添加粒子背景效果 */
+        /* 粒子背景效果 */
         .particles {
             position: fixed;
             top: 0;
@@ -752,6 +805,12 @@
             border: 1px solid rgba(255, 255, 255, 0.3);
         }
         
+        .dark-theme .time-display {
+            background: rgba(30, 41, 59, 0.5);
+            color: var(--dark);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
         /* 新增个性化元素：班级标语 */
         .class-motto {
             text-align: center;
@@ -842,6 +901,10 @@
             font-size: 0.8rem;
         }
         
+        .dark-theme .student-back {
+            background: linear-gradient(135deg, #334155, #475569);
+        }
+        
         /* 新增个性化元素：教室背景 */
         .classroom-bg {
             position: absolute;
@@ -855,6 +918,359 @@
             background-size: 50px 50px;
             opacity: 0.1;
             z-index: -1;
+        }
+        
+        /* 新功能样式 */
+        .top-controls {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .search-box {
+            display: flex;
+            align-items: center;
+            background: var(--light);
+            border-radius: 50px;
+            padding: 10px 20px;
+            box-shadow: var(--card-shadow);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            transition: all 0.3s ease;
+        }
+        
+        .dark-theme .search-box {
+            background: #334155;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .search-box:focus-within {
+            box-shadow: var(--hover-shadow);
+            transform: translateY(-2px);
+        }
+        
+        .search-box input {
+            border: none;
+            background: transparent;
+            padding: 8px 12px;
+            font-size: 1rem;
+            color: var(--dark);
+            width: 200px;
+            outline: none;
+        }
+        
+        .search-box i {
+            color: var(--gray);
+        }
+        
+        .theme-toggle {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--light);
+            border-radius: 50px;
+            padding: 10px 20px;
+            box-shadow: var(--card-shadow);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .dark-theme .theme-toggle {
+            background: #334155;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .theme-toggle:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--hover-shadow);
+        }
+        
+        .theme-toggle i {
+            color: var(--primary);
+        }
+        
+        .history-panel {
+            margin-top: 30px;
+            background: var(--light);
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: var(--card-shadow);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            display: none;
+        }
+        
+        .dark-theme .history-panel {
+            background: #1e293b;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .history-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+        }
+        
+        .dark-theme .history-header {
+            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .history-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--dark);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .history-list {
+            max-height: 300px;
+            overflow-y: auto;
+            padding-right: 10px;
+        }
+        
+        .history-item {
+            background: white;
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            border-left: 4px solid var(--primary);
+            transition: all 0.3s ease;
+        }
+        
+        .dark-theme .history-item {
+            background: #334155;
+        }
+        
+        .history-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .history-item-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-weight: 600;
+            color: var(--dark);
+        }
+        
+        .history-item-content {
+            font-family: 'Fira Code', 'Cascadia Code', 'Courier New', monospace;
+            white-space: pre;
+            overflow-x: auto;
+            background: #f8fafc;
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            color: #1e293b;
+        }
+        
+        .dark-theme .history-item-content {
+            background: #0f172a;
+            color: #e2e8f0;
+        }
+        
+        .settings-panel {
+            margin-top: 30px;
+            background: var(--light);
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: var(--card-shadow);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            display: none;
+        }
+        
+        .dark-theme .settings-panel {
+            background: #1e293b;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .settings-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+        }
+        
+        .dark-theme .settings-header {
+            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .settings-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--dark);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .setting-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        
+        .dark-theme .setting-item {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .setting-item:last-child {
+            border-bottom: none;
+        }
+        
+        .setting-label {
+            font-weight: 500;
+            color: var(--dark);
+        }
+        
+        .setting-description {
+            font-size: 0.9rem;
+            color: var(--gray);
+            margin-top: 5px;
+        }
+        
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 24px;
+        }
+        
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        
+        .toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 24px;
+        }
+        
+        .toggle-slider:before {
+            position: absolute;
+            content: "";
+            height: 16px;
+            width: 16px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+        
+        input:checked + .toggle-slider {
+            background-color: var(--primary);
+        }
+        
+        input:checked + .toggle-slider:before {
+            transform: translateX(26px);
+        }
+        
+        .highlight {
+            background-color: rgba(255, 255, 0, 0.3);
+            border-radius: 4px;
+            padding: 2px 4px;
+        }
+        
+        .student-result {
+            margin-top: 20px;
+            padding: 15px;
+            background: var(--light);
+            border-radius: 12px;
+            box-shadow: var(--card-shadow);
+            display: none;
+        }
+        
+        .dark-theme .student-result {
+            background: #1e293b;
+        }
+        
+        .student-result-header {
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--dark);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .student-details {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .student-info {
+            flex: 1;
+            min-width: 200px;
+        }
+        
+        .student-info p {
+            margin-bottom: 8px;
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .student-info span:first-child {
+            font-weight: 500;
+            color: var(--gray);
+        }
+        
+        .student-info span:last-child {
+            font-weight: 600;
+            color: var(--dark);
+        }
+        
+        .seat-info {
+            background: var(--primary);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 8px;
+            margin-top: 10px;
+            font-weight: 500;
+        }
+        
+        .student-seat-info {
+            margin-top: 15px;
+            padding: 15px;
+            background: var(--light);
+            border-radius: 12px;
+            box-shadow: var(--card-shadow);
+        }
+        
+        .dark-theme .student-seat-info {
+            background: #1e293b;
+        }
+        
+        .seat-position {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        .seat-position i {
+            color: var(--primary);
         }
     </style>
 </head>
@@ -893,6 +1309,18 @@
             <div class="title-decoration"></div>
         </header>
         
+        <!-- 顶部控制栏 -->
+        <div class="top-controls">
+            <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" id="searchInput" placeholder="Search for a student...">
+            </div>
+            <div class="theme-toggle" id="themeToggle">
+                <i class="fas fa-moon"></i>
+                <span>Dark Mode</span>
+            </div>
+        </div>
+        
         <div class="control-panel">
             <button class="btn btn-primary" onclick="generateSeats()">
                 <i class="fas fa-random"></i>
@@ -902,6 +1330,25 @@
                 <i class="fas fa-redo"></i>
                 🔄 Reset System
             </button>
+            <button class="btn btn-secondary" onclick="toggleHistory()">
+                <i class="fas fa-history"></i>
+                History
+            </button>
+            <button class="btn btn-secondary" onclick="toggleSettings()">
+                <i class="fas fa-cog"></i>
+                Settings
+            </button>
+        </div>
+        
+        <!-- 搜索结果 -->
+        <div class="student-result" id="studentResult">
+            <div class="student-result-header">
+                <i class="fas fa-user-graduate"></i>
+                Student Search Result
+            </div>
+            <div class="student-details" id="studentDetails">
+                <!-- 搜索结果将在这里显示 -->
+            </div>
         </div>
         
         <!-- 进度条 -->
@@ -938,13 +1385,76 @@ This system ensures the randomness and fairness of seat allocation, with a 3.2% 
                 <div class="classroom">
                     <div class="classroom-bg"></div>
                     <div class="teacher-desk" id="teacherDesk">
-                        <i class="fas fa-chalkboard"></i> 讲台
+                        <i class="fas fa-chalkboard"></i> Teacher's Desk
                     </div>
                     <div class="rows" id="seatingPlan">
                         <div style="text-align: center; padding: 40px; color: #7f8c8d; font-size: 1.2rem;">
                             Click the "Generate Random Seating Chart" button to start seat allocation.
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 历史记录面板 -->
+        <div class="history-panel" id="historyPanel">
+            <div class="history-header">
+                <div class="history-title">
+                    <i class="fas fa-history"></i>
+                    Generation History
+                </div>
+                <button class="btn btn-secondary" onclick="clearHistory()">
+                    <i class="fas fa-trash"></i>
+                    Clear History
+                </button>
+            </div>
+            <div class="history-list" id="historyList">
+                <!-- 历史记录将在这里显示 -->
+            </div>
+        </div>
+        
+        <!-- 设置面板 -->
+        <div class="settings-panel" id="settingsPanel">
+            <div class="settings-header">
+                <div class="settings-title">
+                    <i class="fas fa-cog"></i>
+                    System Settings
+                </div>
+                <button class="btn btn-secondary" onclick="toggleSettings()">
+                    <i class="fas fa-times"></i>
+                    Close
+                </button>
+            </div>
+            <div class="settings-content">
+                <div class="setting-item">
+                    <div>
+                        <div class="setting-label">Auto-save History</div>
+                        <div class="setting-description">Automatically save each generation to history</div>
+                    </div>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="autoSave" checked>
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+                <div class="setting-item">
+                    <div>
+                        <div class="setting-label">Show Animation Effects</div>
+                        <div class="setting-description">Enable animations for a better user experience</div>
+                    </div>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="showAnimations" checked>
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+                <div class="setting-item">
+                    <div>
+                        <div class="setting-label">Highlight Search Results</div>
+                        <div class="setting-description">Highlight found students in the seating chart</div>
+                    </div>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="highlightResults" checked>
+                        <span class="toggle-slider"></span>
+                    </label>
                 </div>
             </div>
         </div>
@@ -1013,6 +1523,17 @@ This system ensures the randomness and fairness of seat allocation, with a 3.2% 
             "魏可晗", "陈晓希", "汪嘉彦", "沈傲然", "刘洋东", "余正月", "王泺辰", "杨渃馨",
             "余正秋", "张瀛嘉", "汪悦桐", "陈雨谦", "孙天佑", "黄焱熔", "肖雅祺", "常昕妤"
         ];
+        
+        // 全局变量
+        let currentSeating = null;
+        let history = JSON.parse(localStorage.getItem('seatHistory')) || [];
+        let isDarkTheme = localStorage.getItem('darkTheme') === 'true';
+        
+        // 初始化主题
+        if (isDarkTheme) {
+            document.body.classList.add('dark-theme');
+            document.getElementById('themeToggle').innerHTML = '<i class="fas fa-sun"></i><span>Light Mode</span>';
+        }
         
         // 创建粒子背景
         function createParticles() {
@@ -1165,6 +1686,13 @@ This system ensures the randomness and fairness of seat allocation, with a 3.2% 
                 // 清空可视化座位表
                 seatingPlan.innerHTML = '';
                 
+                // 存储当前座位分配
+                currentSeating = {
+                    boys: [...cardboy],
+                    girls: [...cardgirl],
+                    timestamp: new Date().toISOString()
+                };
+                
                 // 生成座位表
                 let deskCounter = 1;
                 for (let i = 1; i <= 27; i += 4) {
@@ -1243,6 +1771,11 @@ This system ensures the randomness and fairness of seat allocation, with a 3.2% 
                 progressBar.style.display = 'none';
                 progressFill.style.width = '0%';
                 
+                // 保存到历史记录
+                if (document.getElementById('autoSave').checked) {
+                    saveToHistory(outputText);
+                }
+                
                 // 显示成功消息
                 showSuccessMessage();
                 
@@ -1253,6 +1786,240 @@ This system ensures the randomness and fairness of seat allocation, with a 3.2% 
         function resetOutput() {
             document.getElementById('output').textContent = 'Welcome to use the intelligent seat allocation system.\nClick the button above to start generating a random seating chart.\nThis system ensures the randomness and fairness of seat allocation, with a 3.2% probability of each person being assigned.';
             document.getElementById('seatingPlan').innerHTML = '<div style="text-align: center; padding: 40px; color: #7f8c8d; font-size: 1.2rem;">Click the "Generate Random Seating Chart" button to start seat allocation.</div>';
+            document.getElementById('studentResult').style.display = 'none';
+            currentSeating = null;
+        }
+        
+        // 切换主题
+        function toggleTheme() {
+            isDarkTheme = !isDarkTheme;
+            document.body.classList.toggle('dark-theme');
+            
+            const themeToggle = document.getElementById('themeToggle');
+            if (isDarkTheme) {
+                themeToggle.innerHTML = '<i class="fas fa-sun"></i><span>Light Mode</span>';
+            } else {
+                themeToggle.innerHTML = '<i class="fas fa-moon"></i><span>Dark Mode</span>';
+            }
+            
+            localStorage.setItem('darkTheme', isDarkTheme);
+        }
+        
+        // 切换历史记录面板
+        function toggleHistory() {
+            const historyPanel = document.getElementById('historyPanel');
+            const settingsPanel = document.getElementById('settingsPanel');
+            
+            if (historyPanel.style.display === 'block') {
+                historyPanel.style.display = 'none';
+            } else {
+                historyPanel.style.display = 'block';
+                settingsPanel.style.display = 'none';
+                renderHistory();
+            }
+        }
+        
+        // 切换设置面板
+        function toggleSettings() {
+            const settingsPanel = document.getElementById('settingsPanel');
+            const historyPanel = document.getElementById('historyPanel');
+            
+            if (settingsPanel.style.display === 'block') {
+                settingsPanel.style.display = 'none';
+            } else {
+                settingsPanel.style.display = 'block';
+                historyPanel.style.display = 'none';
+            }
+        }
+        
+        // 保存到历史记录
+        function saveToHistory(outputText) {
+            const historyItem = {
+                output: outputText,
+                timestamp: new Date().toISOString(),
+                date: new Date().toLocaleString()
+            };
+            
+            history.unshift(historyItem);
+            
+            // 限制历史记录数量
+            if (history.length > 10) {
+                history = history.slice(0, 10);
+            }
+            
+            localStorage.setItem('seatHistory', JSON.stringify(history));
+        }
+        
+        // 渲染历史记录
+        function renderHistory() {
+            const historyList = document.getElementById('historyList');
+            historyList.innerHTML = '';
+            
+            if (history.length === 0) {
+                historyList.innerHTML = '<div style="text-align: center; padding: 20px; color: var(--gray);">No history records yet.</div>';
+                return;
+            }
+            
+            history.forEach((item, index) => {
+                const historyItem = document.createElement('div');
+                historyItem.className = 'history-item';
+                
+                const header = document.createElement('div');
+                header.className = 'history-item-header';
+                header.innerHTML = `
+                    <span>Generation #${history.length - index}</span>
+                    <span>${item.date}</span>
+                `;
+                
+                const content = document.createElement('div');
+                content.className = 'history-item-content';
+                content.textContent = item.output;
+                
+                historyItem.appendChild(header);
+                historyItem.appendChild(content);
+                
+                // 添加点击事件以加载历史记录
+                historyItem.addEventListener('click', () => {
+                    loadHistoryItem(item);
+                });
+                
+                historyList.appendChild(historyItem);
+            });
+        }
+        
+        // 加载历史记录项
+        function loadHistoryItem(item) {
+            document.getElementById('output').textContent = item.output;
+            document.getElementById('historyPanel').style.display = 'none';
+            showSuccessMessage();
+        }
+        
+        // 清空历史记录
+        function clearHistory() {
+            history = [];
+            localStorage.setItem('seatHistory', JSON.stringify(history));
+            renderHistory();
+        }
+        
+        // 搜索学生
+        function searchStudent() {
+            const searchInput = document.getElementById('searchInput');
+            const searchTerm = searchInput.value.trim();
+            const studentResult = document.getElementById('studentResult');
+            const studentDetails = document.getElementById('studentDetails');
+            
+            if (!searchTerm) {
+                studentResult.style.display = 'none';
+                return;
+            }
+            
+            // 在所有学生中搜索
+            const allStudents = [...boys.slice(1), ...girls.slice(1)];
+            const foundStudents = allStudents.filter(student => 
+                student.includes(searchTerm)
+            );
+            
+            if (foundStudents.length === 0) {
+                studentDetails.innerHTML = `<p>No student found with name: "${searchTerm}"</p>`;
+                studentResult.style.display = 'block';
+                return;
+            }
+            
+            // 显示搜索结果
+            let resultHTML = '';
+            foundStudents.forEach(student => {
+                const isMale = isBoy(student);
+                const gender = isMale ? 'Male' : 'Female';
+                const className = isMale ? 'boy' : 'girl';
+                
+                resultHTML += `
+                    <div class="student-info">
+                        <p><span>Name:</span> <span>${student}</span></p>
+                        <p><span>Gender:</span> <span class="${className}">${gender}</span></p>
+                        <p><span>Class:</span> <span>Class 10, Grade 2024</span></p>
+                    </div>
+                `;
+                
+                // 如果当前有座位分配，显示座位信息
+                if (currentSeating) {
+                    const seatInfo = findStudentSeat(student);
+                    if (seatInfo) {
+                        resultHTML += `
+                            <div class="student-seat-info">
+                                <div class="seat-info">
+                                    <i class="fas fa-chair"></i> Seat Information
+                                </div>
+                                <div class="seat-position">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <span>Desk ${seatInfo.deskNumber}, ${seatInfo.position}</span>
+                                </div>
+                                <div class="seat-position">
+                                    <i class="fas fa-user-friends"></i>
+                                    <span>Desk mate: ${seatInfo.deskMate}</span>
+                                </div>
+                            </div>
+                        `;
+                    }
+                }
+            });
+            
+            studentDetails.innerHTML = resultHTML;
+            studentResult.style.display = 'block';
+            
+            // 高亮显示搜索结果
+            if (document.getElementById('highlightResults').checked && currentSeating) {
+                highlightStudentInSeating(foundStudents);
+            }
+        }
+        
+        // 查找学生座位信息
+        function findStudentSeat(studentName) {
+            if (!currentSeating) return null;
+            
+            const desks = document.querySelectorAll('.desk');
+            for (let i = 0; i < desks.length; i++) {
+                const desk = desks[i];
+                const students = desk.querySelectorAll('.student');
+                const deskNumber = desk.querySelector('.desk-number').textContent;
+                
+                for (let j = 0; j < students.length; j++) {
+                    if (students[j].textContent === studentName) {
+                        const deskMate = students[(j + 1) % 2].textContent;
+                        const position = j === 0 ? 'Left' : 'Right';
+                        
+                        return {
+                            deskNumber: deskNumber,
+                            position: position,
+                            deskMate: deskMate
+                        };
+                    }
+                }
+            }
+            
+            return null;
+        }
+        
+        // 在座位表中高亮显示学生
+        function highlightStudentInSeating(studentNames) {
+            const desks = document.querySelectorAll('.desk');
+            
+            // 先移除所有高亮
+            desks.forEach(desk => {
+                const students = desk.querySelectorAll('.student');
+                students.forEach(student => {
+                    student.classList.remove('highlight');
+                });
+            });
+            
+            // 高亮匹配的学生
+            desks.forEach(desk => {
+                const students = desk.querySelectorAll('.student');
+                students.forEach(student => {
+                    if (studentNames.includes(student.textContent)) {
+                        student.classList.add('highlight');
+                    }
+                });
+            });
         }
         
         // 页面加载时显示初始信息
@@ -1261,6 +2028,40 @@ This system ensures the randomness and fairness of seat allocation, with a 3.2% 
             createParticles();
             updateClock();
             setInterval(updateClock, 1000);
+            
+            // 添加事件监听器
+            document.getElementById('themeToggle').addEventListener('click', toggleTheme);
+            document.getElementById('searchInput').addEventListener('input', searchStudent);
+            
+            // 从本地存储加载设置
+            const autoSave = localStorage.getItem('autoSave');
+            const showAnimations = localStorage.getItem('showAnimations');
+            const highlightResults = localStorage.getItem('highlightResults');
+            
+            if (autoSave !== null) {
+                document.getElementById('autoSave').checked = autoSave === 'true';
+            }
+            
+            if (showAnimations !== null) {
+                document.getElementById('showAnimations').checked = showAnimations === 'true';
+            }
+            
+            if (highlightResults !== null) {
+                document.getElementById('highlightResults').checked = highlightResults === 'true';
+            }
+            
+            // 保存设置到本地存储
+            document.getElementById('autoSave').addEventListener('change', function() {
+                localStorage.setItem('autoSave', this.checked);
+            });
+            
+            document.getElementById('showAnimations').addEventListener('change', function() {
+                localStorage.setItem('showAnimations', this.checked);
+            });
+            
+            document.getElementById('highlightResults').addEventListener('change', function() {
+                localStorage.setItem('highlightResults', this.checked);
+            });
         });
     </script>
 </body>
