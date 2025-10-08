@@ -1272,6 +1272,34 @@
         .seat-position i {
             color: var(--primary);
         }
+        
+        /* 语言切换按钮样式 */
+        .language-toggle {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--light);
+            border-radius: 50px;
+            padding: 10px 20px;
+            box-shadow: var(--card-shadow);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .dark-theme .language-toggle {
+            background: #334155;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .language-toggle:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--hover-shadow);
+        }
+        
+        .language-toggle i {
+            color: var(--primary);
+        }
     </style>
 </head>
 <body>
@@ -1303,9 +1331,9 @@
             <div class="logo">
                 <i class="fas fa-chalkboard-teacher"></i>
             </div>
-            <h1>Class 10, Grade 2024</h1>
-            <p class="subtitle">Seat Random Number Program</p>
-            <div class="class-motto">十全十美，十班无畏，十战十胜，勇夺金杯。</div>
+            <h1 id="pageTitle">Class 10, Grade 2024</h1>
+            <p class="subtitle" id="pageSubtitle">Seat Random Number Program</p>
+            <div class="class-motto" id="classMotto">Perfect in every way, Class 10 fearless, ten battles and ten victories, winning the golden cup.</div>
             <div class="title-decoration"></div>
         </header>
         
@@ -1315,28 +1343,32 @@
                 <i class="fas fa-search"></i>
                 <input type="text" id="searchInput" placeholder="Search for a student...">
             </div>
+            <div class="language-toggle" id="languageToggle">
+                <i class="fas fa-globe"></i>
+                <span id="languageText">中文</span>
+            </div>
             <div class="theme-toggle" id="themeToggle">
                 <i class="fas fa-moon"></i>
-                <span>Dark Mode</span>
+                <span id="themeText">Dark Mode</span>
             </div>
         </div>
         
         <div class="control-panel">
             <button class="btn btn-primary" onclick="generateSeats()">
                 <i class="fas fa-random"></i>
-                🎲 Generate Random Seating Chart
+                <span id="generateBtnText">🎲 Generate Random Seating Chart</span>
             </button>
             <button class="btn btn-secondary" onclick="resetOutput()">
                 <i class="fas fa-redo"></i>
-                🔄 Reset System
+                <span id="resetBtnText">🔄 Reset System</span>
             </button>
             <button class="btn btn-secondary" onclick="toggleHistory()">
                 <i class="fas fa-history"></i>
-                History
+                <span id="historyBtnText">History</span>
             </button>
             <button class="btn btn-secondary" onclick="toggleSettings()">
                 <i class="fas fa-cog"></i>
-                Settings
+                <span id="settingsBtnText">Settings</span>
             </button>
         </div>
         
@@ -1344,7 +1376,7 @@
         <div class="student-result" id="studentResult">
             <div class="student-result-header">
                 <i class="fas fa-user-graduate"></i>
-                Student Search Result
+                <span id="searchResultText">Student Search Result</span>
             </div>
             <div class="student-details" id="studentDetails">
                 <!-- 搜索结果将在这里显示 -->
@@ -1358,18 +1390,22 @@
         
         <div class="loading" id="loading">
             <div class="spinner"></div>
-            <p>Seats are being randomly assigned...</p>
+            <p id="loadingText">Seats are being randomly assigned...</p>
         </div>
         
         <div class="output-section">
             <div class="output-header">
                 <div class="output-title">
                     <i class="fas fa-table"></i>
-                    Seat Allocation Result
+                    <span id="outputTitleText">Seat Allocation Result</span>
                 </div>
                 <div class="tab-buttons">
-                    <button class="tab-btn active" onclick="switchTab('console')">Console View</button>
-                    <button class="tab-btn" onclick="switchTab('visual')">Visual View</button>
+                    <button class="tab-btn active" onclick="switchTab('console')">
+                        <span id="consoleTabText">Console View</span>
+                    </button>
+                    <button class="tab-btn" onclick="switchTab('visual')">
+                        <span id="visualTabText">Visual View</span>
+                    </button>
                 </div>
             </div>
             
@@ -1385,10 +1421,10 @@ This system ensures the randomness and fairness of seat allocation, with a 3.2% 
                 <div class="classroom">
                     <div class="classroom-bg"></div>
                     <div class="teacher-desk" id="teacherDesk">
-                        <i class="fas fa-chalkboard"></i> Teacher's Desk
+                        <i class="fas fa-chalkboard"></i> <span id="teacherDeskText">Teacher's Desk</span>
                     </div>
                     <div class="rows" id="seatingPlan">
-                        <div style="text-align: center; padding: 40px; color: #7f8c8d; font-size: 1.2rem;">
+                        <div style="text-align: center; padding: 40px; color: #7f8c8d; font-size: 1.2rem;" id="visualPromptText">
                             Click the "Generate Random Seating Chart" button to start seat allocation.
                         </div>
                     </div>
@@ -1401,11 +1437,11 @@ This system ensures the randomness and fairness of seat allocation, with a 3.2% 
             <div class="history-header">
                 <div class="history-title">
                     <i class="fas fa-history"></i>
-                    Generation History
+                    <span id="historyTitleText">Generation History</span>
                 </div>
                 <button class="btn btn-secondary" onclick="clearHistory()">
                     <i class="fas fa-trash"></i>
-                    Clear History
+                    <span id="clearHistoryText">Clear History</span>
                 </button>
             </div>
             <div class="history-list" id="historyList">
@@ -1418,18 +1454,18 @@ This system ensures the randomness and fairness of seat allocation, with a 3.2% 
             <div class="settings-header">
                 <div class="settings-title">
                     <i class="fas fa-cog"></i>
-                    System Settings
+                    <span id="settingsTitleText">System Settings</span>
                 </div>
                 <button class="btn btn-secondary" onclick="toggleSettings()">
                     <i class="fas fa-times"></i>
-                    Close
+                    <span id="closeSettingsText">Close</span>
                 </button>
             </div>
             <div class="settings-content">
                 <div class="setting-item">
                     <div>
-                        <div class="setting-label">Auto-save History</div>
-                        <div class="setting-description">Automatically save each generation to history</div>
+                        <div class="setting-label" id="autoSaveLabel">Auto-save History</div>
+                        <div class="setting-description" id="autoSaveDesc">Automatically save each generation to history</div>
                     </div>
                     <label class="toggle-switch">
                         <input type="checkbox" id="autoSave" checked>
@@ -1438,8 +1474,8 @@ This system ensures the randomness and fairness of seat allocation, with a 3.2% 
                 </div>
                 <div class="setting-item">
                     <div>
-                        <div class="setting-label">Show Animation Effects</div>
-                        <div class="setting-description">Enable animations for a better user experience</div>
+                        <div class="setting-label" id="animationsLabel">Show Animation Effects</div>
+                        <div class="setting-description" id="animationsDesc">Enable animations for a better user experience</div>
                     </div>
                     <label class="toggle-switch">
                         <input type="checkbox" id="showAnimations" checked>
@@ -1448,8 +1484,8 @@ This system ensures the randomness and fairness of seat allocation, with a 3.2% 
                 </div>
                 <div class="setting-item">
                     <div>
-                        <div class="setting-label">Highlight Search Results</div>
-                        <div class="setting-description">Highlight found students in the seating chart</div>
+                        <div class="setting-label" id="highlightLabel">Highlight Search Results</div>
+                        <div class="setting-description" id="highlightDesc">Highlight found students in the seating chart</div>
                     </div>
                     <label class="toggle-switch">
                         <input type="checkbox" id="highlightResults" checked>
@@ -1464,28 +1500,28 @@ This system ensures the randomness and fairness of seat allocation, with a 3.2% 
                 <div class="stat-icon">
                     <i class="fas fa-male"></i>
                 </div>
-                <h3>Boy Count</h3>
+                <h3 id="boyCountText">Boy Count</h3>
                 <div class="number">31</div>
             </div>
             <div class="stat-card stat-girl">
                 <div class="stat-icon">
                     <i class="fas fa-female"></i>
                 </div>
-                <h3>Girl Count</h3>
+                <h3 id="girlCountText">Girl Count</h3>
                 <div class="number">23</div>
             </div>
             <div class="stat-card stat-total">
                 <div class="stat-icon">
                     <i class="fas fa-users"></i>
                 </div>
-                <h3>All Count</h3>
+                <h3 id="totalCountText">All Count</h3>
                 <div class="number">54</div>
             </div>
             <div class="stat-card stat-seat">
                 <div class="stat-icon">
                     <i class="fas fa-chair"></i>
                 </div>
-                <h3>Seat Count</h3>
+                <h3 id="seatCountText">Seat Count</h3>
                 <div class="number">27</div>
             </div>
         </div>
@@ -1493,23 +1529,153 @@ This system ensures the randomness and fairness of seat allocation, with a 3.2% 
         <footer>
             <div class="footer-content">
                 <div>
-                    <p>© 2025 Class 10's Seat Random Number Program | Author by @wrh316 | Website</p>
+                    <p id="footerText">© 2025 Class 10's Seat Random Number Program | Author by @wrh316 | Website</p>
                     <p style="margin-top: 5px; font-size: 0.9rem; color: #94a3b8;">
-                        <i class="fas fa-code"></i> Website Versions，C++ Versions：https://note.ms/class10seat
+                        <i class="fas fa-code"></i> <span id="versionInfoText">Website Versions，C++ Versions：https://note.ms/class10seat</span>
                     </p>
                 </div>
                 <div class="version">
-                    <i class="fas fa-star"></i> Version 3.16.7 | Last Update: 2025.10.1
+                    <i class="fas fa-star"></i> <span id="versionText">Version 3.16.7 | Last Update: 2025.10.1</span>
                 </div>
             </div>
         </footer>
     </div>
 
     <div class="success-message" id="successMessage">
-        <i class="fas fa-check-circle"></i> The Code has Completed Successfully
+        <i class="fas fa-check-circle"></i> <span id="successText">The Code has Completed Successfully</span>
     </div>
 
     <script>
+        // 语言资源
+        const resources = {
+            en: {
+                // 页面标题和副标题
+                pageTitle: "Class 10, Grade 2024",
+                pageSubtitle: "Seat Random Number Program",
+                classMotto: "Perfect in every way, Class 10 fearless, ten battles and ten victories, winning the golden cup.",
+                
+                // 按钮文本
+                generateBtnText: "🎲 Generate Random Seating Chart",
+                resetBtnText: "🔄 Reset System",
+                historyBtnText: "History",
+                settingsBtnText: "Settings",
+                
+                // 搜索相关
+                searchPlaceholder: "Search for a student...",
+                searchResultText: "Student Search Result",
+                
+                // 输出区域
+                outputTitleText: "Seat Allocation Result",
+                consoleTabText: "Console View",
+                visualTabText: "Visual View",
+                teacherDeskText: "Teacher's Desk",
+                visualPromptText: 'Click the "Generate Random Seating Chart" button to start seat allocation.',
+                
+                // 加载文本
+                loadingText: "Seats are being randomly assigned...",
+                
+                // 统计卡片
+                boyCountText: "Boy Count",
+                girlCountText: "Girl Count",
+                totalCountText: "All Count",
+                seatCountText: "Seat Count",
+                
+                // 历史记录
+                historyTitleText: "Generation History",
+                clearHistoryText: "Clear History",
+                
+                // 设置
+                settingsTitleText: "System Settings",
+                closeSettingsText: "Close",
+                autoSaveLabel: "Auto-save History",
+                autoSaveDesc: "Automatically save each generation to history",
+                animationsLabel: "Show Animation Effects",
+                animationsDesc: "Enable animations for a better user experience",
+                highlightLabel: "Highlight Search Results",
+                highlightDesc: "Highlight found students in the seating chart",
+                
+                // 主题切换
+                themeText: "Dark Mode",
+                
+                // 语言切换
+                languageText: "中文",
+                
+                // 成功消息
+                successText: "The Code has Completed Successfully",
+                
+                // 页脚
+                footerText: "© 2025 Class 10's Seat Random Number Program | Author by @wrh316 | Website",
+                versionInfoText: "Website Versions，C++ Versions：https://note.ms/class10seat",
+                versionText: "Version 3.16.7 | Last Update: 2025.10.1",
+                
+                // 初始输出文本
+                initialOutput: "Welcome to use the intelligent seat allocation system.\nClick the button above to start generating a random seating chart.\nThis system ensures the randomness and fairness of seat allocation, with a 3.2% probability of each person being assigned."
+            },
+            zh: {
+                // 页面标题和副标题
+                pageTitle: "2024级10班",
+                pageSubtitle: "座位随机分配系统",
+                classMotto: "十全十美，十班无畏，十战十胜，勇夺金杯。",
+                
+                // 按钮文本
+                generateBtnText: "🎲 生成随机座位表",
+                resetBtnText: "🔄 重置系统",
+                historyBtnText: "历史记录",
+                settingsBtnText: "设置",
+                
+                // 搜索相关
+                searchPlaceholder: "搜索学生...",
+                searchResultText: "学生搜索结果",
+                
+                // 输出区域
+                outputTitleText: "座位分配结果",
+                consoleTabText: "控制台视图",
+                visualTabText: "可视化视图",
+                teacherDeskText: "讲台",
+                visualPromptText: '点击"生成随机座位表"按钮开始座位分配。',
+                
+                // 加载文本
+                loadingText: "正在随机分配座位...",
+                
+                // 统计卡片
+                boyCountText: "男生人数",
+                girlCountText: "女生人数",
+                totalCountText: "总人数",
+                seatCountText: "座位数量",
+                
+                // 历史记录
+                historyTitleText: "生成历史",
+                clearHistoryText: "清空历史",
+                
+                // 设置
+                settingsTitleText: "系统设置",
+                closeSettingsText: "关闭",
+                autoSaveLabel: "自动保存历史",
+                autoSaveDesc: "自动将每次生成保存到历史记录",
+                animationsLabel: "显示动画效果",
+                animationsDesc: "启用动画以获得更好的用户体验",
+                highlightLabel: "高亮搜索结果",
+                highlightDesc: "在座位表中高亮显示找到的学生",
+                
+                // 主题切换
+                themeText: "深色模式",
+                
+                // 语言切换
+                languageText: "English",
+                
+                // 成功消息
+                successText: "代码已成功完成",
+                
+                // 页脚
+                footerText: "© 2025 10班座位随机分配系统 | 作者：@wrh316 | 网站",
+                versionInfoText: "网页版本，C++版本：https://note.ms/class10seat",
+                versionText: "版本 3.16.7 | 最后更新：2025.10.1",
+                
+                // 初始输出文本
+                initialOutput: "欢迎使用智能座位分配系统。\n点击上方按钮开始生成随机座位表。\n本系统确保座位分配的随机性和公平性，每个人被分配的概率为3.2%。"
+            }
+        };
+
         // 学生名单
         const boys = [
             "", "张逸轩", "张庐焜", "黄月童", "吴弘宇", "张涵睿", "余浩玮", "许正涛",
@@ -1528,11 +1694,81 @@ This system ensures the randomness and fairness of seat allocation, with a 3.2% 
         let currentSeating = null;
         let history = JSON.parse(localStorage.getItem('seatHistory')) || [];
         let isDarkTheme = localStorage.getItem('darkTheme') === 'true';
+        let currentLanguage = localStorage.getItem('language') || 'en';
         
-        // 初始化主题
-        if (isDarkTheme) {
-            document.body.classList.add('dark-theme');
-            document.getElementById('themeToggle').innerHTML = '<i class="fas fa-sun"></i><span>Light Mode</span>';
+        // 初始化主题和语言
+        function initializeApp() {
+            // 设置主题
+            if (isDarkTheme) {
+                document.body.classList.add('dark-theme');
+                document.getElementById('themeToggle').innerHTML = '<i class="fas fa-sun"></i><span id="themeText">Light Mode</span>';
+            }
+            
+            // 设置语言
+            setLanguage(currentLanguage);
+            
+            // 更新时钟
+            updateClock();
+            setInterval(updateClock, 1000);
+            
+            // 创建粒子背景
+            createParticles();
+        }
+        
+        // 设置语言
+        function setLanguage(lang) {
+            currentLanguage = lang;
+            localStorage.setItem('language', lang);
+            
+            const resource = resources[lang];
+            
+            // 更新所有文本元素
+            document.getElementById('pageTitle').textContent = resource.pageTitle;
+            document.getElementById('pageSubtitle').textContent = resource.pageSubtitle;
+            document.getElementById('classMotto').textContent = resource.classMotto;
+            document.getElementById('generateBtnText').textContent = resource.generateBtnText;
+            document.getElementById('resetBtnText').textContent = resource.resetBtnText;
+            document.getElementById('historyBtnText').textContent = resource.historyBtnText;
+            document.getElementById('settingsBtnText').textContent = resource.settingsBtnText;
+            document.getElementById('searchInput').placeholder = resource.searchPlaceholder;
+            document.getElementById('searchResultText').textContent = resource.searchResultText;
+            document.getElementById('outputTitleText').textContent = resource.outputTitleText;
+            document.getElementById('consoleTabText').textContent = resource.consoleTabText;
+            document.getElementById('visualTabText').textContent = resource.visualTabText;
+            document.getElementById('teacherDeskText').textContent = resource.teacherDeskText;
+            document.getElementById('visualPromptText').textContent = resource.visualPromptText;
+            document.getElementById('loadingText').textContent = resource.loadingText;
+            document.getElementById('boyCountText').textContent = resource.boyCountText;
+            document.getElementById('girlCountText').textContent = resource.girlCountText;
+            document.getElementById('totalCountText').textContent = resource.totalCountText;
+            document.getElementById('seatCountText').textContent = resource.seatCountText;
+            document.getElementById('historyTitleText').textContent = resource.historyTitleText;
+            document.getElementById('clearHistoryText').textContent = resource.clearHistoryText;
+            document.getElementById('settingsTitleText').textContent = resource.settingsTitleText;
+            document.getElementById('closeSettingsText').textContent = resource.closeSettingsText;
+            document.getElementById('autoSaveLabel').textContent = resource.autoSaveLabel;
+            document.getElementById('autoSaveDesc').textContent = resource.autoSaveDesc;
+            document.getElementById('animationsLabel').textContent = resource.animationsLabel;
+            document.getElementById('animationsDesc').textContent = resource.animationsDesc;
+            document.getElementById('highlightLabel').textContent = resource.highlightLabel;
+            document.getElementById('highlightDesc').textContent = resource.highlightDesc;
+            document.getElementById('themeText').textContent = resource.themeText;
+            document.getElementById('languageText').textContent = resource.languageText;
+            document.getElementById('successText').textContent = resource.successText;
+            document.getElementById('footerText').textContent = resource.footerText;
+            document.getElementById('versionInfoText').textContent = resource.versionInfoText;
+            document.getElementById('versionText').textContent = resource.versionText;
+            
+            // 更新初始输出文本
+            if (!currentSeating) {
+                document.getElementById('output').textContent = resource.initialOutput;
+            }
+        }
+        
+        // 切换语言
+        function toggleLanguage() {
+            const newLanguage = currentLanguage === 'en' ? 'zh' : 'en';
+            setLanguage(newLanguage);
         }
         
         // 创建粒子背景
@@ -1660,7 +1896,9 @@ This system ensures the randomness and fairness of seat allocation, with a 3.2% 
             // 显示加载动画和进度条
             loading.style.display = 'block';
             progressBar.style.display = 'block';
-            output.textContent = 'Seats are being allocated. Please wait a moment...';
+            output.textContent = currentLanguage === 'en' 
+                ? 'Seats are being allocated. Please wait a moment...' 
+                : '正在分配座位，请稍候...';
             
             // 模拟进度条
             let progress = 0;
@@ -1784,8 +2022,9 @@ This system ensures the randomness and fairness of seat allocation, with a 3.2% 
         
         // 重置输出
         function resetOutput() {
-            document.getElementById('output').textContent = 'Welcome to use the intelligent seat allocation system.\nClick the button above to start generating a random seating chart.\nThis system ensures the randomness and fairness of seat allocation, with a 3.2% probability of each person being assigned.';
-            document.getElementById('seatingPlan').innerHTML = '<div style="text-align: center; padding: 40px; color: #7f8c8d; font-size: 1.2rem;">Click the "Generate Random Seating Chart" button to start seat allocation.</div>';
+            const resource = resources[currentLanguage];
+            document.getElementById('output').textContent = resource.initialOutput;
+            document.getElementById('seatingPlan').innerHTML = `<div style="text-align: center; padding: 40px; color: #7f8c8d; font-size: 1.2rem;">${resource.visualPromptText}</div>`;
             document.getElementById('studentResult').style.display = 'none';
             currentSeating = null;
         }
@@ -1797,10 +2036,13 @@ This system ensures the randomness and fairness of seat allocation, with a 3.2% 
             
             const themeToggle = document.getElementById('themeToggle');
             if (isDarkTheme) {
-                themeToggle.innerHTML = '<i class="fas fa-sun"></i><span>Light Mode</span>';
+                themeToggle.innerHTML = '<i class="fas fa-sun"></i><span id="themeText">Light Mode</span>';
             } else {
-                themeToggle.innerHTML = '<i class="fas fa-moon"></i><span>Dark Mode</span>';
+                themeToggle.innerHTML = '<i class="fas fa-moon"></i><span id="themeText">Dark Mode</span>';
             }
+            
+            // 更新主题文本
+            document.getElementById('themeText').textContent = resources[currentLanguage].themeText;
             
             localStorage.setItem('darkTheme', isDarkTheme);
         }
@@ -1856,7 +2098,10 @@ This system ensures the randomness and fairness of seat allocation, with a 3.2% 
             historyList.innerHTML = '';
             
             if (history.length === 0) {
-                historyList.innerHTML = '<div style="text-align: center; padding: 20px; color: var(--gray);">No history records yet.</div>';
+                const noHistoryText = currentLanguage === 'en' 
+                    ? 'No history records yet.' 
+                    : '暂无历史记录。';
+                historyList.innerHTML = `<div style="text-align: center; padding: 20px; color: var(--gray);">${noHistoryText}</div>`;
                 return;
             }
             
@@ -1867,7 +2112,7 @@ This system ensures the randomness and fairness of seat allocation, with a 3.2% 
                 const header = document.createElement('div');
                 header.className = 'history-item-header';
                 header.innerHTML = `
-                    <span>Generation #${history.length - index}</span>
+                    <span>${currentLanguage === 'en' ? 'Generation' : '生成'} #${history.length - index}</span>
                     <span>${item.date}</span>
                 `;
                 
@@ -1920,7 +2165,10 @@ This system ensures the randomness and fairness of seat allocation, with a 3.2% 
             );
             
             if (foundStudents.length === 0) {
-                studentDetails.innerHTML = `<p>No student found with name: "${searchTerm}"</p>`;
+                const noStudentText = currentLanguage === 'en' 
+                    ? `No student found with name: "${searchTerm}"` 
+                    : `未找到名为"${searchTerm}"的学生`;
+                studentDetails.innerHTML = `<p>${noStudentText}</p>`;
                 studentResult.style.display = 'block';
                 return;
             }
@@ -1929,14 +2177,17 @@ This system ensures the randomness and fairness of seat allocation, with a 3.2% 
             let resultHTML = '';
             foundStudents.forEach(student => {
                 const isMale = isBoy(student);
-                const gender = isMale ? 'Male' : 'Female';
+                const gender = isMale 
+                    ? (currentLanguage === 'en' ? 'Male' : '男生') 
+                    : (currentLanguage === 'en' ? 'Female' : '女生');
                 const className = isMale ? 'boy' : 'girl';
+                const classText = currentLanguage === 'en' ? 'Class 10, Grade 2024' : '2024级10班';
                 
                 resultHTML += `
                     <div class="student-info">
-                        <p><span>Name:</span> <span>${student}</span></p>
-                        <p><span>Gender:</span> <span class="${className}">${gender}</span></p>
-                        <p><span>Class:</span> <span>Class 10, Grade 2024</span></p>
+                        <p><span>${currentLanguage === 'en' ? 'Name' : '姓名'}:</span> <span>${student}</span></p>
+                        <p><span>${currentLanguage === 'en' ? 'Gender' : '性别'}:</span> <span class="${className}">${gender}</span></p>
+                        <p><span>${currentLanguage === 'en' ? 'Class' : '班级'}:</span> <span>${classText}</span></p>
                     </div>
                 `;
                 
@@ -1944,18 +2195,24 @@ This system ensures the randomness and fairness of seat allocation, with a 3.2% 
                 if (currentSeating) {
                     const seatInfo = findStudentSeat(student);
                     if (seatInfo) {
+                        const seatInfoText = currentLanguage === 'en' ? 'Seat Information' : '座位信息';
+                        const positionText = seatInfo.position === 'Left' 
+                            ? (currentLanguage === 'en' ? 'Left' : '左侧') 
+                            : (currentLanguage === 'en' ? 'Right' : '右侧');
+                        const deskMateText = currentLanguage === 'en' ? 'Desk mate' : '同桌';
+                        
                         resultHTML += `
                             <div class="student-seat-info">
                                 <div class="seat-info">
-                                    <i class="fas fa-chair"></i> Seat Information
+                                    <i class="fas fa-chair"></i> ${seatInfoText}
                                 </div>
                                 <div class="seat-position">
                                     <i class="fas fa-map-marker-alt"></i>
-                                    <span>Desk ${seatInfo.deskNumber}, ${seatInfo.position}</span>
+                                    <span>${currentLanguage === 'en' ? 'Desk' : '座位'} ${seatInfo.deskNumber}, ${positionText}</span>
                                 </div>
                                 <div class="seat-position">
                                     <i class="fas fa-user-friends"></i>
-                                    <span>Desk mate: ${seatInfo.deskMate}</span>
+                                    <span>${deskMateText}: ${seatInfo.deskMate}</span>
                                 </div>
                             </div>
                         `;
@@ -2025,12 +2282,11 @@ This system ensures the randomness and fairness of seat allocation, with a 3.2% 
         // 页面加载时显示初始信息
         window.addEventListener('DOMContentLoaded', () => {
             console.log('The intelligent seat allocation system has been loaded.');
-            createParticles();
-            updateClock();
-            setInterval(updateClock, 1000);
+            initializeApp();
             
             // 添加事件监听器
             document.getElementById('themeToggle').addEventListener('click', toggleTheme);
+            document.getElementById('languageToggle').addEventListener('click', toggleLanguage);
             document.getElementById('searchInput').addEventListener('input', searchStudent);
             
             // 从本地存储加载设置
