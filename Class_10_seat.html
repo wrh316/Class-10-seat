@@ -1606,7 +1606,7 @@ This system ensures the randomness and fairness of seat allocation, with a 3.2% 
                 // 页脚
                 footerText: "© 2025 Class 10's Seat Random Number Program | Author by @wrh316 | Website",
                 versionInfoText: "Website Versions，C++ Versions：https://note.ms/class10seat",
-                versionText: "Version 3.16.7 | Last Update: 2025.10.1",
+                versionText: "Version 3.16.174 | Last Update: 2025.10.24",
                 
                 // 初始输出文本
                 initialOutput: "Welcome to use the intelligent seat allocation system.\nClick the button above to start generating a random seating chart.\nThis system ensures the randomness and fairness of seat allocation, with a 3.2% probability of each person being assigned."
@@ -1669,7 +1669,7 @@ This system ensures the randomness and fairness of seat allocation, with a 3.2% 
                 // 页脚
                 footerText: "© 2025 10班座位随机分配系统 | 作者：@wrh316 | 网站",
                 versionInfoText: "网页版本，C++版本：https://note.ms/class10seat",
-                versionText: "版本 3.16.7 | 最后更新：2025.10.1",
+                versionText: "版本 3.16.174 | 最后更新：2025.10.24",
                 
                 // 初始输出文本
                 initialOutput: "欢迎使用智能座位分配系统。\n点击上方按钮开始生成随机座位表。\n本系统确保座位分配的随机性和公平性，每个人被分配的概率为3.2%。"
@@ -1799,13 +1799,25 @@ This system ensures the randomness and fairness of seat allocation, with a 3.2% 
             }
         }
         
-        // Fisher-Yates 洗牌算法
-        function shuffleArray(array) {
-            for (let i = array.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [array[i], array[j]] = [array[j], array[i]];
-            }
+        // 使用Crypto API生成安全的随机数
+        async function getSecureRandomValues(length) {
+            const array = new Uint32Array(length);
+            window.crypto.getRandomValues(array);
             return array;
+        }
+        
+        // 使用Fisher-Yates洗牌算法与Crypto API
+        async function shuffleArraySecure(array) {
+            const shuffledArray = [...array];
+            const randomValues = await getSecureRandomValues(shuffledArray.length);
+            
+            for (let i = shuffledArray.length - 1; i > 0; i--) {
+                // 使用安全的随机数生成器
+                const j = randomValues[i] % (i + 1);
+                [shuffledArray[i], shuffledArray[j]] = [shuffledArray[j], shuffledArray[i]];
+            }
+            
+            return shuffledArray;
         }
         
         // 生成固定宽度的字符串
@@ -1886,7 +1898,7 @@ This system ensures the randomness and fairness of seat allocation, with a 3.2% 
         }
         
         // 生成座位表
-        function generateSeats() {
+        async function generateSeats() {
             const output = document.getElementById('output');
             const seatingPlan = document.getElementById('seatingPlan');
             const loading = document.getElementById('loading');
@@ -1910,16 +1922,16 @@ This system ensures the randomness and fairness of seat allocation, with a 3.2% 
                 }
             }, 100);
             
-            setTimeout(() => {
+            setTimeout(async () => {
                 let outputText = '';
                 
                 // 创建卡片数组
                 let cardboy = Array.from({length: 31}, (_, i) => i + 1);
                 let cardgirl = Array.from({length: 23}, (_, i) => i + 1);
                 
-                // 随机打乱
-                shuffleArray(cardboy);
-                shuffleArray(cardgirl);
+                // 使用安全的随机算法打乱数组
+                cardboy = await shuffleArraySecure(cardboy);
+                cardgirl = await shuffleArraySecure(cardgirl);
                 
                 // 清空可视化座位表
                 seatingPlan.innerHTML = '';
