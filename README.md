@@ -1764,8 +1764,9 @@ This system ensures the randomness and fairness of seat allocation, with a 3.2% 
     <script>
         // 用户账户数据
         const users = {
-            "public": "123456",
-            "wrh316": "998244353%%%"
+            "public": "Lengendary Grandmaster",
+            "wrh316": "998244353%%%",
+            "Gao": "168168"
         };
         
         // 语言资源
