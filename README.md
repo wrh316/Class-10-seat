@@ -2239,13 +2239,24 @@ This system ensures the randomness and fairness of seat allocation, with a 3.2% 
                 // 创建座位数组
                 let seats = [];
                 
-                // 添加男生女生同桌
+                // 添加男生女生同桌 - 确保前后错开
                 for (let i = 0; i < boyGirlPairs; i++) {
-                    seats.push({
-                        type: 'boy-girl',
-                        student1: boys[cardboy[i]],
-                        student2: girls[cardgirl[i]]
-                    });
+                    // 交替安排男生女生和女生男生
+                    if (i % 2 === 0) {
+                        // 男生在左，女生在右
+                        seats.push({
+                            type: 'boy-girl',
+                            student1: boys[cardboy[i]],
+                            student2: girls[cardgirl[i]]
+                        });
+                    } else {
+                        // 女生在左，男生在右
+                        seats.push({
+                            type: 'girl-boy',
+                            student1: girls[cardgirl[i]],
+                            student2: boys[cardboy[i]]
+                        });
+                    }
                 }
                 
                 // 添加男生男生同桌
